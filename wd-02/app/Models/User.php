@@ -6,6 +6,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Models\JadwalPeriksa;
+
 
 class User extends Authenticatable
 {
@@ -30,12 +32,10 @@ class User extends Authenticatable
         'poli',
     ];
 
-    public function jadwalPeriksa()
-    {
-        return $this->hasMany(JadwalPeriksa::class, 'id_dokter');
+    public function jadwalPeriksas(){
+    return $this->hasMany(JadwalPeriksa::class, 'id_dokter');
     }
-    public function janjiPerika()
-    {
+    public function janjiPeriksas(){
         return $this->hasMany(JanjiPeriksa::class, 'id_pasien');
     }
 

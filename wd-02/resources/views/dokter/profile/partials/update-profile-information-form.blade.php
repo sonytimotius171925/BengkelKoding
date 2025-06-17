@@ -13,7 +13,7 @@
         @csrf
     </form>
 
-    <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6">
+    <form method="post" action="{{ route('dokter.profile.update') }}" class="mt-6 space-y-6">
         @csrf
         @method('patch')
 
@@ -45,6 +45,21 @@
                     @endif
                 </div>
             @endif
+        </div>
+
+        <!-- Dropdown Poli -->
+        <div>
+            <x-input-label for="id_poli" :value="__('Poli')" />
+            <select id="id_poli" name="id_poli"
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring focus:ring-indigo-200">
+                <option value="">-- Pilih Poli --</option>
+                @foreach ($polis as $poli)
+                    <option value="{{ $poli->id }}" {{ old('id_poli', $user->id_poli) == $poli->id ? 'selected' : '' }}>
+                        {{ $poli->nama }}
+                    </option>
+                @endforeach
+            </select>
+            <x-input-error class="mt-2" :messages="$errors->get('id_poli')" />
         </div>
 
         <div class="flex items-center gap-4">

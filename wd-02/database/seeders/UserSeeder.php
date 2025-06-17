@@ -24,7 +24,7 @@ class UserSeeder extends Seeder
             'no_ktp' => '1234567890123456',
             'no_hp' => '081234567890',
             'no_rm' => null,
-            'poli' => 'Poli Umum'
+            'id_poli' => 2,
         ]);
 
         User::create([
@@ -36,7 +36,7 @@ class UserSeeder extends Seeder
             'no_ktp' => '2345678901234567',
             'no_hp' => '081298765432',
             'no_rm' => null,
-            'poli' => 'Poli Anak'
+            'id_poli' => 3,
         ]);
 
         // Seeder Pasien
@@ -49,7 +49,6 @@ class UserSeeder extends Seeder
             'no_ktp' => '3456789012345678',
             'no_hp' => '082134567890',
             'no_rm' => 'RM001',
-            'poli' => null
         ]);
 
         User::create([
@@ -61,7 +60,6 @@ class UserSeeder extends Seeder
             'no_ktp' => '4567890123456789',
             'no_hp' => '083245678901',
             'no_rm' => 'RM002',
-            'poli' => null
         ]);
     }
 }

@@ -65,9 +65,27 @@ class ObatController extends Controller
 
     public function destroy($id)
     {
-        $obat = Obat::find($id);
+        $obat = Obat::findOrFail($id);
         $obat->delete();
 
-        return redirect()->route('dokter.obat.index');
+        return redirect()->route('dokter.obat.index')->with('success', 'Obat berhasil dihapus (soft delete).');
     }
+
+    public function trashed()
+    {
+        // Mengambil data obat yang sudah soft delete
+        $obatsTerhapus = Obat::onlyTrashed()->get();
+
+        // Return view dengan data
+        return view('dokter.obat.trashed', compact('obatsTerhapus'));
+    }
+
+    public function restore($id)
+    {
+        $obat = Obat::onlyTrashed()->findOrFail($id);
+        $obat->restore();
+
+        return redirect()->route('dokter.obat.trashed')->with('success', 'Obat berhasil direstore.');
+    }
+
 }

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Models\JadwalPeriksa;
+use App\Models\Poli;
 
 
 class User extends Authenticatable
@@ -30,6 +31,7 @@ class User extends Authenticatable
         'no_hp',
         'no_rm',
         'poli',
+        'id_poli',
     ];
 
     public function jadwalPeriksas(){
@@ -37,6 +39,11 @@ class User extends Authenticatable
     }
     public function janjiPeriksas(){
         return $this->hasMany(JanjiPeriksa::class, 'id_pasien');
+    }
+
+    public function poli()
+    {
+        return $this->belongsTo(Poli::class, 'id_poli');
     }
 
     /**

@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\dokter\ProfileController;
 use App\Http\Controllers\dokter\ObatController;
 use App\Http\Controllers\dokter\JadwalPeriksaController;
 use App\Http\Controllers\dokter\MemeriksaController;
@@ -16,16 +16,17 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
 
 Route::middleware(['auth', 'role:dokter'])->prefix('dokter')->group(function () {
     Route::get('/dashboard', function () {
-        return view('dokter.profile.dashboard');
+        return view('dokter.dashboard');
     })->name('dokter.dashboard');
+
+    Route::prefix('profile')->group(function (){
+        Route::get('/', [ProfileController::class, 'edit'])->name('dokter.profile.edit');
+        Route::patch('/', [ProfileController::class, 'update'])->name('dokter.profile.update');
+        Route::delete('/', [ProfileController::class, 'destroy'])->name('dokter.profile.destroy');
+    });
 
     Route::prefix('jadwal-periksa')->group(function () {
         Route::get('/jadwal-periksa', [JadwalPeriksaController::class, 'index'])->name('dokter.jadwal-periksa.index');
@@ -50,6 +51,8 @@ Route::middleware(['auth', 'role:dokter'])->prefix('dokter')->group(function () 
         Route::get('/{id}/edit', [ObatController::class, 'edit'])->name('dokter.obat.edit');
         Route::patch('/{id}', [ObatController::class, 'update'])->name('dokter.obat.update');
         Route::delete('/{id}', [ObatController::class, 'destroy'])->name('dokter.obat.destroy');
+        Route::get('/trashed', [ObatController::class, 'trashed'])->name('dokter.obat.trashed');
+        Route::patch('restore/{id}', [ObatController::class, 'restore'])->name('dokter.obat.restore');
     });
 });
 

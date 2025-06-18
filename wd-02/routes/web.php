@@ -7,6 +7,8 @@ use App\Http\Controllers\dokter\JadwalPeriksaController;
 use App\Http\Controllers\dokter\MemeriksaController;
 use App\Http\Controllers\pasien\JanjiPeriksaController;
 use App\Http\Controllers\pasien\RiwayatPeriksaController;
+use App\Http\Controllers\pasien\ProfilePasienController;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -60,6 +62,11 @@ Route::middleware(['auth', 'role:pasien'])->prefix('pasien')->group(function () 
     Route::get('/dashboard', function () {
         return view('pasien.dashboard');
     })->name('pasien.dashboard');
+    Route::prefix('profile')->group(function (){
+        Route::get('/', [ProfilePasienController::class, 'edit'])->name('pasien.profile.edit');
+        Route::patch('/', [ProfilePasienController::class, 'update'])->name('pasien.profile.update');
+        Route::delete('/', [ProfilePasienController::class, 'destroy'])->name('pasien.profile.destroy');
+    });
      Route::prefix('janji-periksa')->group(function(){
         Route::get('/', [JanjiPeriksaController::class, 'index'])->name('pasien.janji-periksa.index');
         Route::post('/', [JanjiPeriksaController::class, 'store'])->name('pasien.janji-periksa.store');

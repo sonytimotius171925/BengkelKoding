@@ -61,9 +61,10 @@
                             <a type="button" href="{{ route('dokter.jadwal-periksa.index') }}" class="btn btn-secondary">
                                 Batal
                             </a>
-                                <button type="submit" class="btn btn-primary">
-                                    Simpan
-                                </button>
+                            <button type="submit" class="btn btn-primary">
+                                Simpan
+                            </button>
+
                         </form>
                     </section>
                 </div>

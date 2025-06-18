@@ -77,7 +77,7 @@
                                     <form action="{{ route('dokter.jadwal-periksa.destroy', $jadwalPeriksa->id) }}" method="POST" class="inline-block" onsubmit="return confirm('Apakah Anda yakin ingin menghapus jadwal ini?');">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-outline-danger btn-sm mt-1">Hapus</button>
+                                        <button type="submit" class="btn btn-outline-danger btn-sm mt-1">Delete</button>
                                     </form>
                                 </td>
                             </tr>

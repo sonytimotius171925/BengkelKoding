@@ -66,9 +66,16 @@
                     </x-slot>
 
                     <x-slot name="content">
-                        <x-dropdown-link :href="route('dokter.profile.edit')">
-                            {{ __('Profile') }}
-                        </x-dropdown-link>
+                        @if(Auth::user()->role == 'dokter')
+                            <x-dropdown-link :href="route('dokter.profile.edit')">
+                                {{ __('Profile') }}
+                            </x-dropdown-link>
+                        @elseif(Auth::user()->role == 'pasien')
+                            <x-dropdown-link :href="route('pasien.profile.edit')">
+                                {{ __('Profile') }}
+                            </x-dropdown-link>
+                        @endif
+
 
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
